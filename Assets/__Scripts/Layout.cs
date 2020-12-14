@@ -32,6 +32,7 @@ public class Layout : MonoBehaviour {
     // This function is called to read in the LayoutXML.xml file
     public void ReadLayout(string xmlText)
     {
+
         xmlr = new PT_XMLReader();
         xmlr.Parse(xmlText); // The XML is parsed
         xml = xmlr.xml["xml"][0]; // And xml is set as a shortcut to the XML
