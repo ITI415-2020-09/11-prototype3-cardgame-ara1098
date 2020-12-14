@@ -27,9 +27,9 @@ public class Layout : MonoBehaviour {
     public SlotDef drawPile;
     public SlotDef discardPile;
     // This holds all of the possible names for the layers set by layerID
-    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2", "Row3", "Discard", "Draw" };
+    public string[] sortingLayerNames = new string[] { "Row0", "Row1", "Row2", "Row3", "Row4", "Row5", "Row6", "Discard", "Draw" };
 
-	// This function is called to read in the LayoutXML.xml file
+    // This function is called to read in the LayoutXML.xml file
     public void ReadLayout(string xmlText)
     {
         xmlr = new PT_XMLReader();
@@ -42,8 +42,14 @@ public class Layout : MonoBehaviour {
 
         //Read in the slots
         SlotDef tSD;
-        //slotsX is used as a shortcut to all the <slot>s
+        //slotsX is used as a shortcut to all the <slot>
         PT_XMLHashList slotsX = xml["slot"];
+
+        for(int k = 0; k<sortingLayerNames.Length; k++)
+        {
+            print(sortingLayerNames[k]);
+
+        }
 
         for (int i=0; i<slotsX.Count; i++)
         {
@@ -62,6 +68,7 @@ public class Layout : MonoBehaviour {
             tSD.x = float.Parse(slotsX[i].att("x"));
             tSD.y = float.Parse(slotsX[i].att("y"));
             tSD.layerID = int.Parse(slotsX[i].att("layer"));
+           
             //This converts the number of the layerID into a text layerName
             tSD.layerName = sortingLayerNames[tSD.layerID];
 
