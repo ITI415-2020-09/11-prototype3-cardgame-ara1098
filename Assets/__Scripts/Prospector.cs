@@ -5,12 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class Prospector : MonoBehaviour {
+public class Prospector : MonoBehaviour
+{
 
-	static public Prospector S;
+    static public Prospector S;
 
-	[Header("Set in Inspector")]
-	public TextAsset deckXML;
+    [Header("Set in Inspector")]
+    public TextAsset deckXML;
     public TextAsset layoutXML;
     public float xOffset = 3;
     public float yOffset = -2.5f;
@@ -51,20 +52,20 @@ public class Prospector : MonoBehaviour {
         go.GetComponent<Text>().text = hScore;
 
         // Set up the UI Texts that show at the end of the round
-        go = GameObject.Find ("GameOver");
+        go = GameObject.Find("GameOver");
         if (go != null)
         {
             gameOverText = go.GetComponent<Text>();
         }
 
-        go = GameObject.Find ("RoundResult");
+        go = GameObject.Find("RoundResult");
         if (go != null)
         {
             roundResultText = go.GetComponent<Text>();
         }
 
         // Make the end of round texts invisible
-        ShowResultsUI( false );
+        ShowResultsUI(false);
     }
 
     void ShowResultsUI(bool show)
@@ -92,7 +93,7 @@ public class Prospector : MonoBehaviour {
     {
         List<CardProspector> lCP = new List<CardProspector>();
         CardProspector tCP;
-        foreach(Card tCD in lCD)
+        foreach (Card tCD in lCD)
         {
             tCP = tCD as CardProspector;
             lCP.Add(tCP);
@@ -121,7 +122,7 @@ public class Prospector : MonoBehaviour {
 
         CardProspector cp;
         // Follow the layout
-        foreach(SlotDef tSD in layout.slotDefs)
+        foreach (SlotDef tSD in layout.slotDefs)
         {
             // ^ Iterate through all the SlotDefs in the layout.slotDefs as tSD
             cp = Draw(); // Pull a card from the top (beginning) of the draw Pile
@@ -144,7 +145,7 @@ public class Prospector : MonoBehaviour {
         // Set which cards are hiding others
         foreach (CardProspector tCP in tableau)
         {
-            foreach(int hid in tCP.slotDef.hiddenBy)
+            foreach (int hid in tCP.slotDef.hiddenBy)
             {
                 cp = FindCardByLayoutID(hid);
                 tCP.hiddenBy.Add(cp);
@@ -229,7 +230,7 @@ public class Prospector : MonoBehaviour {
     {
         CardProspector cd;
         // Go through all the cards of the drawPile
-        for(int i=0; i<drawPile.Count; i++)
+        for (int i = 0; i < drawPile.Count; i++)
         {
             cd = drawPile[i];
             cd.transform.parent = layoutAnchor;
@@ -272,7 +273,7 @@ public class Prospector : MonoBehaviour {
                     // If the card is face-down, it's not valid
                     validMatch = false;
                 }
-                if(!AdjacentRank(cd, target))
+                if (!AdjacentRank(cd, target))
                 {
                     // If it's not an adjacent rank, it's not valid
                     validMatch = false;
@@ -340,7 +341,7 @@ public class Prospector : MonoBehaviour {
         else
         {
             gameOverText.text = "GameOver";
-            if(ScoreManager.HIGH_SCORE <= score)
+            if (ScoreManager.HIGH_SCORE <= score)
             {
                 string str = "You got the high score!\nHigh Score: " + score;
                 roundResultText.text = str;
